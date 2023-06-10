@@ -5,7 +5,7 @@ using UnityEngine;
 public static class ActionManager
 {
 	public static Action<bool> OpenZoomPanel { get; set; }
-	public static Action<Vector3, PoolItems> SetUIParticle { get; set; }
+	public static Action<Vector3, PoolItem> SetUIParticle { get; set; }
 
 
 	//Camera
@@ -16,8 +16,12 @@ public static class ActionManager
 	public static Action Load { get; set; }
 
 	//Pool Part
-	public static Func<PoolItems, Vector3, Transform, GameObject> GetPoolItem { get; set; }
-	public static Action<GameObject, PoolItems, float> ReturnToPool { get; set; }
+	public static Func<PoolItem, Vector3, Transform, GameObject> GetPoolItem { get; set; }
+	public static Action<GameObject, PoolItem, float> ReturnToPool { get; set; }
+
+
+	//INGAME
+	public static Action<BuildingType> OnClickUIBuilding { get; set; }
 
 
 	public static void ResetAllStaticsVariables()

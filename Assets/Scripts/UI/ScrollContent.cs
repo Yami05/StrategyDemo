@@ -26,7 +26,7 @@ public class ScrollContent : MonoBehaviour
 	{
 
 		GetContentMenu();
-		InitProduct();
+		PlaceProduct();
 		InitiliazeProductPositions();
 	}
 
@@ -38,13 +38,14 @@ public class ScrollContent : MonoBehaviour
 
 	}
 
-	private void InitProduct()
+	private void PlaceProduct()
 	{
 
 		for (int i = 0; i < itemCount; i++)
 		{
-			GameObject productionItem = ActionManager.GetPoolItem?.Invoke(PoolItems.UIProductionItem, default, transform);
-			productionItem.gameObject.name = i.ToString();
+			GameObject productionItem = ActionManager.GetPoolItem?.Invoke(PoolItem.UIProductionItem, default, transform);
+			BuildingButton productionButton = productionItem.GetComponent<BuildingButton>();
+			productionButton.SetPreferences(i);
 			products[i] = rectTransform.GetChild(i) as RectTransform;
 			products[i].localScale = Vector3.one * ProductsScale;
 		}

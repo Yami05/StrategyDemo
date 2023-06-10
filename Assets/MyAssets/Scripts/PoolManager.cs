@@ -9,18 +9,18 @@ public class PoolManager : MonoBehaviour
 	[Serializable]
 	public struct Pool
 	{
-		public PoolItems items;
+		public PoolItem items;
 		public GameObject prefab;
 		public int poolSize;
 	}
 
 	[SerializeField] Pool[] pools;
 
-	private readonly Dictionary<PoolItems, Queue<GameObject>> pooledObjects =
-			new Dictionary<PoolItems, Queue<GameObject>>();
+	private readonly Dictionary<PoolItem, Queue<GameObject>> pooledObjects =
+			new Dictionary<PoolItem, Queue<GameObject>>();
 
-	private readonly Dictionary<PoolItems, Pool> pooledObjectsContainer =
-			new Dictionary<PoolItems, Pool>();
+	private readonly Dictionary<PoolItem, Pool> pooledObjectsContainer =
+			new Dictionary<PoolItem, Pool>();
 
 
 	private void Awake()
@@ -39,7 +39,7 @@ public class PoolManager : MonoBehaviour
 		}
 	}
 
-	public void Spawn(PoolItems items)
+	public void Spawn(PoolItem items)
 	{
 		pooledObjects[items].Clear();
 
@@ -51,7 +51,7 @@ public class PoolManager : MonoBehaviour
 		}
 	}
 
-	public GameObject GetFromPool(PoolItems items, Vector3 position, Transform parent = null)
+	public GameObject GetFromPool(PoolItem items, Vector3 position, Transform parent = null)
 	{
 
 		if (pooledObjects[items].Count > 0)
@@ -71,12 +71,12 @@ public class PoolManager : MonoBehaviour
 		}
 	}
 
-	public void ReturnToPool(GameObject poolObject, PoolItems item, float time = 0)
+	public void ReturnToPool(GameObject poolObject, PoolItem item, float time = 0)
 	{
 		StartCoroutine(ReturnTime(poolObject, item, time));
 	}
 
-	IEnumerator ReturnTime(GameObject poolObject, PoolItems item, float time)
+	IEnumerator ReturnTime(GameObject poolObject, PoolItem item, float time)
 	{
 		yield return new WaitForSeconds(time);
 		pooledObjects[item].Enqueue(poolObject);

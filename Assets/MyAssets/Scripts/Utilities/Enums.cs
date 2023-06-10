@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public enum PoolItems
+public enum PoolItem
 {
 	UIProductionItem = 0,
 }
@@ -12,9 +12,12 @@ public enum AnimType
 
 }
 
-public enum BuildingTypes
+public enum BuildingType
 {
-
+	Barracks = 0,
+	PowerPlant = 1,
+	ResearchFacility = 2,
+	MedicalCenter = 3,
 }
 
 public class Enums

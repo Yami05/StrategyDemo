@@ -10,7 +10,7 @@ public class UIParticleManager : MonoBehaviour
 		ActionManager.SetUIParticle += SetParticle;
 	}
 
-	private void SetParticle(Vector3 desiredPos, PoolItems poolItems)
+	private void SetParticle(Vector3 desiredPos, PoolItem poolItems)
 	{
 		GameObject particle = ActionManager.GetPoolItem?.Invoke(poolItems, desiredPos, transform.parent);
 		particle.GetComponent<RectTransform>().localScale = Vector3.one;

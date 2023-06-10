@@ -18,6 +18,7 @@ public class ButtonBaseController : MonoBehaviour
 
 	public virtual void OnClick()
 	{
+
 	}
 
 	public virtual void ScaleDown()
