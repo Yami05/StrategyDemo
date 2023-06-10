@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -10,8 +8,7 @@ public class InputManager : MonoBehaviour
 	private GameObject building;
 	private BuildingFeatures selectedFeature;
 
-	private bool isBuildingSelected;
-	//private bool canBuild;
+	private bool isBuildingCreated;
 
 	private Vector3 mousePos;
 	private Vector2 firstMousePos;
@@ -40,12 +37,13 @@ public class InputManager : MonoBehaviour
 		if (Input.GetMouseButton(0))
 		{
 			OnMouseHold();
+			CreateBuilding();
 			MoveBuilding();
 		}
 		if (Input.GetMouseButtonUp(0))
 		{
-			OnMouseRelease();
 			PlaceBuilding();
+			OnMouseRelease();
 		}
 	}
 	private void OnMouseClick()
@@ -65,17 +63,25 @@ public class InputManager : MonoBehaviour
 		diff.x = 0;
 	}
 
-	private void GetBuilding(BuildingType type)
+	private void GetBuilding(BuildingType type) => selectedFeature = buildingManager.GetBuilding(type);
+
+	private void CreateBuilding()
 	{
-		selectedFeature = buildingManager.GetBuilding(type);
+		if (diff.x < 4 || isBuildingCreated)
+		{
+			return;
+
+		}
 
 		building = selectedFeature.GetBuilding();
-		isBuildingSelected = true;
+		isBuildingCreated = true;
 	}
+
 
 	private void MoveBuilding()
 	{
-		if (!isBuildingSelected || diff.x < 1)
+
+		if (!isBuildingCreated)
 			return;
 
 		mousePos = InputExtension.GetMouseWorldPosition(mainCamera);
@@ -85,18 +91,18 @@ public class InputManager : MonoBehaviour
 
 		if (gridManager.CheckCanBuild(mousePos, selectedFeature))
 		{
-			print("yes");
+			//give color green
 		}
 		else
 		{
-			print("no");
+			//give color red
 		}
 	}
 
 	private void PlaceBuilding()
 	{
 
-		if (!isBuildingSelected)
+		if (!isBuildingCreated)
 			return;
 
 		Vector3 mousePos = InputExtension.GetMouseWorldPosition(mainCamera);
@@ -107,8 +113,6 @@ public class InputManager : MonoBehaviour
 		{
 			building.transform.position = gridManager.GetWorldPosition(x, y);
 
-			isBuildingSelected = false;
-
 			gridManager.SetCanBuild(mousePos, selectedFeature);
 		}
 		else
@@ -116,6 +120,7 @@ public class InputManager : MonoBehaviour
 			Destroy(building);
 		}
 
+		isBuildingCreated = false;
 	}
 
 }
