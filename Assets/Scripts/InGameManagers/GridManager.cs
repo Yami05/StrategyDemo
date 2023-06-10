@@ -1,13 +1,11 @@
-using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GridManager : MonoSingleton<GridManager>
 {
 	[SerializeField] private GridSettings gridSettings;
-	[SerializeField] private Transform textParent;
 
-	private int[,] gridArray;
+	private gridCell[,] gridArray;
 	private TextMesh[,] textArray;
 
 	private void Awake()
@@ -17,7 +15,7 @@ public class GridManager : MonoSingleton<GridManager>
 
 	private void SetArray()
 	{
-		gridArray = new int[gridSettings.Width, gridSettings.Height];
+		gridArray = new gridCell[gridSettings.Width, gridSettings.Height];
 		textArray = new TextMesh[gridSettings.Width, gridSettings.Height];
 	}
 
@@ -30,13 +28,13 @@ public class GridManager : MonoSingleton<GridManager>
 
 	private void CreateGrid()
 	{
-		gridSettings.DrawGrid(GetWorldPosition, textParent, gridArray, textArray);
+		gridSettings.DrawGrid(GetWorldPosition, null, gridArray, textArray);
 	}
 
 	private void DeleteGrid()
 	{
-		for (int i = textParent.childCount - 1; i >= 0; i--)
-			DestroyImmediate(textParent.GetChild(0).gameObject);
+		//for (int i = textParent.childCount - 1; i >= 0; i--)
+		//	DestroyImmediate(textParent.GetChild(0).gameObject);
 
 	}
 
@@ -51,23 +49,7 @@ public class GridManager : MonoSingleton<GridManager>
 		y = Mathf.FloorToInt(worldPosition.y) / gridSettings.CellSize;
 	}
 
-
-	//public void SetValue(int x, int y, int value)
-	//{
-	//	gridArray[x, y] = value;
-	//	//textArray[x, y].text = gridArray[x, y].ToString();
-
-	//}
-
-	//public void SetValue(Vector3 worldPosition, int value)
-	//{
-	//	int x, y;
-	//	GetXY(worldPosition, out x, out y);
-	//	SetValue(x, y, value);
-
-	//}
-
-	public int GetGridObject(int x, int z)
+	public gridCell GetGridObject(int x, int z)
 	{
 		if (x >= 0 && z >= 0 && x < gridSettings.Width && z < gridSettings.Height)
 		{
@@ -75,9 +57,36 @@ public class GridManager : MonoSingleton<GridManager>
 		}
 		else
 		{
-			return 0;
+			return null;
 		}
 	}
 
+	public List<Vector2Int> PlaceOnGrid(Vector2Int placedObjectPos, BuildingFeatures selectedFeature)
+	{
+		return selectedFeature.GetGridPositionList(placedObjectPos);
+	}
 
+	public bool CanBuild(Vector3 mousePos, BuildingFeatures selectedFeature)
+	{
+
+		GetXY(mousePos, out int x, out int y);
+
+		Vector2Int placedObjectMousePos = new Vector2Int(x, y);
+
+		List<Vector2Int> gridPositionList = PlaceOnGrid(placedObjectMousePos, selectedFeature);
+
+		foreach (Vector2Int gridPosition in gridPositionList)
+		{
+			if (GetGridObject(gridPosition.x, gridPosition.y).CanBuild)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
 }

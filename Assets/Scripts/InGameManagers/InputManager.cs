@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
@@ -6,9 +8,12 @@ public class InputManager : MonoBehaviour
 	private GridManager gridManager;
 	private BuildingManager buildingManager;
 	private GameObject building;
+	private BuildingFeatures selectedFeature;
 
 	private bool isBuildingSelected;
+	//private bool canBuild;
 
+	private Vector3 mousePos;
 	private Vector2 firstMousePos;
 	private Vector2 lastMousePos;
 	private Vector2 diff;
@@ -62,7 +67,7 @@ public class InputManager : MonoBehaviour
 
 	private void GetBuilding(BuildingType type)
 	{
-		BuildingFeatures selectedFeature = buildingManager.GetBuilding(type);
+		selectedFeature = buildingManager.GetBuilding(type);
 
 		building = selectedFeature.GetBuilding();
 		isBuildingSelected = true;
@@ -73,10 +78,35 @@ public class InputManager : MonoBehaviour
 		if (!isBuildingSelected || diff.x < 1)
 			return;
 
-		Vector3 mousePos = InputExtension.GetMouseWorldPosition(mainCamera);
+		mousePos = InputExtension.GetMouseWorldPosition(mainCamera);
 		mousePos.z = 0;
 
 		building.transform.position = mousePos;
+
+	}
+
+	private bool CanBuild()
+	{
+
+		gridManager.GetXY(mousePos, out int x, out int y);
+
+		Vector2Int placedObjectPos = new Vector2Int(x, y);
+
+		List<Vector2Int> gridPositionList = selectedFeature.GetGridPositionList(placedObjectPos);
+
+		foreach (Vector2Int gridPosition in gridPositionList)
+		{
+			if (!gridManager.GetGridObject(gridPosition.x, gridPosition.y).CanBuild)
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void PlaceBuilding()
