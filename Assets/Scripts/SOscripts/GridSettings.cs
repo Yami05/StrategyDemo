@@ -12,7 +12,7 @@ public class GridSettings : ScriptableObject
 	public int Height { get => height; }
 	public int CellSize { get => cellSize; }
 
-	public void DrawGrid(Func<int, int, Vector3> GetWorldPosition, Transform textParent, gridCell[,] gridArray, TextMesh[,] textArray)
+	public void DrawGrid(Func<int, int, Vector3> GetWorldPosition, Transform textParent, GridCell[,] gridArray, TextMesh[,] textArray)
 	{
 
 		for (int x = 0; x < gridArray.GetLength(0); x++)
@@ -31,7 +31,7 @@ public class GridSettings : ScriptableObject
 
 }
 
-public class gridCell
+public class GridCell
 {
 	private bool canBuild = true;
 

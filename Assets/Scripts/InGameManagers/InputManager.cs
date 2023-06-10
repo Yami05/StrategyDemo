@@ -83,30 +83,14 @@ public class InputManager : MonoBehaviour
 
 		building.transform.position = mousePos;
 
-	}
-
-	private bool CanBuild()
-	{
-
-		gridManager.GetXY(mousePos, out int x, out int y);
-
-		Vector2Int placedObjectPos = new Vector2Int(x, y);
-
-		List<Vector2Int> gridPositionList = selectedFeature.GetGridPositionList(placedObjectPos);
-
-		foreach (Vector2Int gridPosition in gridPositionList)
+		if (gridManager.CheckCanBuild(mousePos, selectedFeature))
 		{
-			if (!gridManager.GetGridObject(gridPosition.x, gridPosition.y).CanBuild)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
+			print("yes");
 		}
-
-		return false;
+		else
+		{
+			print("no");
+		}
 	}
 
 	private void PlaceBuilding()
@@ -118,9 +102,20 @@ public class InputManager : MonoBehaviour
 		Vector3 mousePos = InputExtension.GetMouseWorldPosition(mainCamera);
 		mousePos.z = 0;
 		gridManager.GetXY(mousePos, out int x, out int y);
-		building.transform.position = gridManager.GetWorldPosition(x, y);
 
-		isBuildingSelected = false;
+		if (gridManager.CheckCanBuild(mousePos, selectedFeature))
+		{
+			building.transform.position = gridManager.GetWorldPosition(x, y);
+
+			isBuildingSelected = false;
+
+			gridManager.SetCanBuild(mousePos, selectedFeature);
+		}
+		else
+		{
+			Destroy(building);
+		}
+
 	}
 
 }
