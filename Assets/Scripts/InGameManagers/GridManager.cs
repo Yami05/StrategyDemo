@@ -21,10 +21,6 @@ public class GridManager : MonoSingleton<GridManager>
 		textArray = new TextMesh[gridSettings.Width, gridSettings.Height];
 	}
 
-
-#if UNITY_EDITOR
-
-	[Button]
 	private void InitiliazeGrid()
 	{
 		SetArray();
@@ -83,6 +79,5 @@ public class GridManager : MonoSingleton<GridManager>
 		}
 	}
 
-#endif
 
 }

@@ -319,8 +319,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCount: 5
-  productsScale: 1
-  products: []
+  productsScale: 3
+  itemSpacing: 200
 --- !u!224 &1229085102 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1229085102, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
@@ -642,33 +642,9 @@ PrefabInstance:
       propertyPath: m_ShowMaskGraphic
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1224951867, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224951867, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
-      propertyPath: m_Spacing
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224951867, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
-      propertyPath: m_Padding.m_Top
-      value: -420
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224951867, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
-      propertyPath: m_ChildAlignment
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224951867, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
-      propertyPath: m_Padding.m_Left
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224951867, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
-      propertyPath: m_ChildForceExpandWidth
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1224951867, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
-      propertyPath: m_ChildForceExpandHeight
-      value: 0
+    - target: {fileID: 1224951865, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -514
       objectReference: {fileID: 0}
     - target: {fileID: 2146660593, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
       propertyPath: m_Name
@@ -684,7 +660,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2146660597, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2146660597, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -728,7 +704,11 @@ PrefabInstance:
       objectReference: {fileID: 4238655377392646317}
     - target: {fileID: 9138704995829131888, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
       propertyPath: m_RenderMode
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138704995829131888, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9138704995829131889, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
       propertyPath: m_UiScaleMode

@@ -59,7 +59,7 @@ public class PoolManager : MonoBehaviour
 			GameObject obj = pooledObjects[items].Dequeue();
 			obj.SetActive(true);
 			obj.transform.position = position;
-			obj.transform.parent = parent;
+			obj.transform.SetParent(parent);
 			return obj;
 		}
 		else
