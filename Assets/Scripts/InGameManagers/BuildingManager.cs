@@ -8,7 +8,6 @@ public class BuildingManager : MonoSingleton<BuildingManager>
 
 	public List<BuildingFeatures> BuildingFeatures { get => buildingFeatures; set => buildingFeatures = value; }
 
-
 	public BuildingFeatures GetBuilding(BuildingType buildingType)
 	{
 		return BuildingFeatures.Find(x => x.BuildingType == buildingType);

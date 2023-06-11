@@ -59,7 +59,11 @@ public class InformationPanel : MonoBehaviour
 
 		canProduce = buildingFeature.CanProduce;
 
-		productionPart.SetActive(canProduce);
+		if (canProduce)
+		{
+			productionPart.GetComponent<ProductionPanel>().Products = buildingFeature.ProductFeatures;
+			productionPart.SetActive(canProduce);
+		}
 
 	}
 }

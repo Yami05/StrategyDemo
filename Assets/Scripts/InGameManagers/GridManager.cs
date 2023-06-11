@@ -7,7 +7,6 @@ public class GridManager : MonoSingleton<GridManager>
 
 	[SerializeField] List<GameObject> displayedObjects = new List<GameObject>();
 
-
 	private GridCell[,] gridArray;
 	private TextMesh[,] textArray;
 

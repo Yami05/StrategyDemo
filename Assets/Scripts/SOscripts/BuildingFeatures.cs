@@ -24,10 +24,12 @@ public class BuildingFeatures : ScriptableObject
 	public string NameOfBuilding { get => nameOfBuilding; }
 	public bool CanProduce { get => canProduce; }
 	public GameObject BuildingPrefab { get => buildingPrefab; }
+	public ProductFeatures[] ProductFeatures { get => productFeatures; set => productFeatures = value; }
 
 	public GameObject GetBuilding()
 	{
 		GameObject building = Instantiate(buildingPrefab);
+		building.GetComponent<BuildingBaseController>().Type = buildingType;
 		Vector3 localScale = building.transform.GetChild(0).localScale;
 		width = localScale.x;
 		height = localScale.y;
