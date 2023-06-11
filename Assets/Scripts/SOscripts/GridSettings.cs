@@ -34,6 +34,8 @@ public class GridSettings : ScriptableObject
 public class GridCell
 {
 	private bool canBuild = true;
+	private bool isColored = false;
 
 	public bool CanBuild { get => canBuild; set => canBuild = value; }
+	public bool IsColored { get => isColored; set => isColored = value; }
 }

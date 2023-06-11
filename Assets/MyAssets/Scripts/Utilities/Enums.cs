@@ -5,6 +5,7 @@ using UnityEngine;
 public enum PoolItem
 {
 	UIProductionItem = 0,
+	GridCellPreview = 1,
 }
 
 public enum AnimType

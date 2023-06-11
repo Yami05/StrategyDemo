@@ -31,7 +31,6 @@ public class BuildingFeatures : ScriptableObject
 		Vector3 localScale = building.transform.GetChild(0).localScale;
 		width = localScale.x;
 		height = localScale.y;
-
 		return building;
 	}
 

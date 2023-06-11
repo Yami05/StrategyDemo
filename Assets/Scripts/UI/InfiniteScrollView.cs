@@ -13,12 +13,18 @@ public class InfiniteScrollView : MonoBehaviour, IBeginDragHandler, IDragHandler
 	private Vector2 lastPosOfDrag;
 
 	private bool isPositiveDrag;
+	private bool isBuildingSpawned;
 
 	private void Awake()
 	{
 		scrollContent = GetComponentInChildren<ScrollContent>();
 		scrollRect = GetComponent<ScrollRect>();
 
+	}
+
+	private void Start()
+	{
+		ActionManager.OnBuildingCreated += (bool enable) => scrollRect.enabled = !enable;
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)

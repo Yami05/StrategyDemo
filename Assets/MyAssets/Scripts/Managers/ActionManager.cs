@@ -22,7 +22,7 @@ public static class ActionManager
 
 	//INGAME
 	public static Action<BuildingType> OnClickUIBuilding { get; set; }
-
+	public static Action<bool> OnBuildingCreated { get; set; }
 
 	public static void ResetAllStaticsVariables()
 	{

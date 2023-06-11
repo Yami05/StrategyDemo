@@ -67,12 +67,13 @@ public class InputManager : MonoBehaviour
 
 	private void CreateBuilding()
 	{
+
 		if (diff.x < 4 || isBuildingCreated)
 		{
 			return;
-
 		}
 
+		ActionManager.OnBuildingCreated?.Invoke(true);
 		building = selectedFeature.GetBuilding();
 		isBuildingCreated = true;
 	}
@@ -102,6 +103,8 @@ public class InputManager : MonoBehaviour
 	private void PlaceBuilding()
 	{
 
+		ActionManager.OnBuildingCreated?.Invoke(false);
+
 		if (!isBuildingCreated)
 			return;
 
@@ -119,6 +122,7 @@ public class InputManager : MonoBehaviour
 		{
 			Destroy(building);
 		}
+
 
 		isBuildingCreated = false;
 	}
