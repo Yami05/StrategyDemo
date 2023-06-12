@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
 	{
 		gridManager = GridManager.instance;
 		buildingManager = BuildingManager.instance;
-		ActionManager.OnClickUIBuilding += GetBuilding;
+		ActionManager.OnClickFromBuildingMenu += GetBuilding;
 	}
 
 	private void Update()
@@ -63,7 +63,7 @@ public class InputManager : MonoBehaviour
 		diff.x = 0;
 	}
 
-	private void GetBuilding(BuildingType type) => selectedFeature = buildingManager.GetBuilding(type);
+	private void GetBuilding(BuildingType type, Transform buildingPos) => selectedFeature = buildingManager.GetBuilding(type);
 
 	private void CreateBuilding()
 	{

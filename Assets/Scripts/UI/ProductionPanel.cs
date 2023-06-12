@@ -6,7 +6,10 @@ public class ProductionPanel : MonoBehaviour
 	private ProductFeatures[] products;
 	private Button[] usableButtons;
 
+	private Transform productionBuilding;
+
 	public ProductFeatures[] Products { get => products; set => products = value; }
+	public Transform ProductionBuilding { get => productionBuilding; set => productionBuilding = value; }
 
 	private void Awake()
 	{
@@ -23,7 +26,8 @@ public class ProductionPanel : MonoBehaviour
 		for (int i = 0; i < products.Length; i++)
 		{
 			Button currentButton = usableButtons[i];
-
+			ProduceButton produceButton = currentButton.GetComponent<ProduceButton>();
+			produceButton.Product = products[i];
 			currentButton.gameObject.SetActive(true);
 			currentButton.image.sprite = products[i].Photo;
 		}

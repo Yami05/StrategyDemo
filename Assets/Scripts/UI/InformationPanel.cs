@@ -26,7 +26,7 @@ public class InformationPanel : MonoBehaviour
 		buildingManager = BuildingManager.instance;
 
 		SetPos(false);
-		ActionManager.OnClickUIBuilding += FillInformations;
+		ActionManager.OnClickFromBuildingMenu += FillInformations;
 	}
 
 	private void SetPos(bool isClickled)
@@ -49,7 +49,7 @@ public class InformationPanel : MonoBehaviour
 
 	}
 
-	private void FillInformations(BuildingType buildingType)
+	private void FillInformations(BuildingType buildingType, Transform buildingPosition)
 	{
 		SetPos(true);
 
@@ -61,9 +61,13 @@ public class InformationPanel : MonoBehaviour
 
 		if (canProduce)
 		{
-			productionPart.GetComponent<ProductionPanel>().Products = buildingFeature.ProductFeatures;
-			productionPart.SetActive(canProduce);
+			ProductionPanel productionPanel = productionPart.GetComponent<ProductionPanel>();
+			productionPanel.ProductionBuilding = buildingPosition;
+			productionPanel.Products = buildingFeature.ProductFeatures;
+
 		}
+
+		productionPart.SetActive(canProduce);
 
 	}
 }

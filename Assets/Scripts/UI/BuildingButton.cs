@@ -28,7 +28,7 @@ public class BuildingButton : ButtonBaseController, IPointerDownHandler
 
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		ActionManager.OnClickUIBuilding?.Invoke(buildingType);
+		ActionManager.OnClickFromBuildingMenu?.Invoke(buildingType, null);
 
 	}
 }

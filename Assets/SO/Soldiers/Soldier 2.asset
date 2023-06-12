@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Soldier 2
   m_EditorClassIdentifier: 
   photo: {fileID: 21300000, guid: dcea51d6065d64246aeec467afeff684, type: 3}
+  productPrefab: {fileID: 1480980666674891656, guid: 84717028807a6a24c9ec9289c6695f3c, type: 3}
   health: 10
   damage: 5

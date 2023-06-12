@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class BuildingBaseController : MonoBehaviour
 {
-	//Setting this with instantieate
+	//Setting this with instantiate
 	private BuildingType type;
 
 	public BuildingType Type { get => type; set => type = value; }
 
 	private void OnMouseDown()
 	{
-		ActionManager.OnClickUIBuilding?.Invoke(Type);
+		ActionManager.OnClickFromBuildingMenu?.Invoke(Type, transform);
 	}
 }
