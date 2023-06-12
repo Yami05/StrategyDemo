@@ -1,8 +1,8 @@
+
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputPlacementController : InputBaseController
 {
-	private Camera mainCamera;
 	private GridManager gridManager;
 	private BuildingManager buildingManager;
 	private GameObject building;
@@ -10,60 +10,32 @@ public class InputManager : MonoBehaviour
 
 	private bool isBuildingCreated;
 
-	private Vector3 mousePos;
-	private Vector2 firstMousePos;
-	private Vector2 lastMousePos;
-	private Vector2 diff;
-
-	private void Awake()
+	protected override void Start()
 	{
-		mainCamera = Camera.main;
-	}
-
-	private void Start()
-	{
+		base.Start();
 		gridManager = GridManager.instance;
 		buildingManager = BuildingManager.instance;
 		ActionManager.OnClickFromBuildingMenu += GetBuilding;
+
 	}
 
-	private void Update()
+	protected override void OnMouseClick()
 	{
-
-		if (Input.GetMouseButtonDown(0))
-		{
-			OnMouseClick();
-		}
-		if (Input.GetMouseButton(0))
-		{
-			OnMouseHold();
-			CreateBuilding();
-			MoveBuilding();
-		}
-		if (Input.GetMouseButtonUp(0))
-		{
-			PlaceBuilding();
-			OnMouseRelease();
-		}
+		base.OnMouseClick();
 	}
-	private void OnMouseClick()
+
+	protected override void OnMouseHold()
 	{
-		firstMousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-		lastMousePos = firstMousePos;
+		CreateBuilding();
+		MoveBuilding();
+		base.OnMouseHold();
 	}
 
-	private void OnMouseHold()
+	protected override void OnMouseRelease()
 	{
-		lastMousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-		diff = lastMousePos - firstMousePos;
+		base.OnMouseRelease();
+		PlaceBuilding();
 	}
-
-	private void OnMouseRelease()
-	{
-		diff.x = 0;
-	}
-
-	private void GetBuilding(BuildingType type, Transform buildingPos) => selectedFeature = buildingManager.GetBuilding(type);
 
 	private void CreateBuilding()
 	{
@@ -77,7 +49,6 @@ public class InputManager : MonoBehaviour
 		building = selectedFeature.GetBuilding();
 		isBuildingCreated = true;
 	}
-
 
 	private void MoveBuilding()
 	{
@@ -126,5 +97,7 @@ public class InputManager : MonoBehaviour
 
 		isBuildingCreated = false;
 	}
+
+	private void GetBuilding(BuildingType type, Transform buildingPos) => selectedFeature = buildingManager.GetBuilding(type);
 
 }

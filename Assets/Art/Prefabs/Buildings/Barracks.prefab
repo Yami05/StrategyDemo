@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 653075226135153169}
   - component: {fileID: 5965895890349386740}
   - component: {fileID: 7305126902946398677}
-  m_Layer: 0
+  - component: {fileID: 4565337180247738259}
+  m_Layer: 3
   m_Name: Barracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,6 +76,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soldierMovePoint: {fileID: 8005287478365816326}
+--- !u!114 &4565337180247738259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653075226135153168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  uniqueID: 3923054259295668008
+  updateError: 1
+  checkTime: 1e+20
 --- !u!1 &653075226424521000
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 653075226424521001}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 653075226929065535}
   - component: {fileID: 653075226929065532}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 653075227112504724}
   - component: {fileID: 653075227112504727}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +302,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8005287478365816326}
   - component: {fileID: 461529955868980522}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MovePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
