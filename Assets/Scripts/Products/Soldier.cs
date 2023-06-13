@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class Soldier : ProductBaseController
 {
-	[SerializeField] private Transform target;
 
-	private AIDestinationSetter destinationSetter;
+	private SoldierMovementController movementController;
+
+	private void Awake()
+	{
+		movementController = GetComponent<SoldierMovementController>();
+	}
 
 	private void OnMouseDown()
 	{
@@ -26,7 +30,6 @@ public class Soldier : ProductBaseController
 
 	public void SetTargetPosition(Vector3 pos)
 	{
-		target.position = pos;
-		destinationSetter.target = target;
+		movementController.InitMovement(pos);
 	}
 }
