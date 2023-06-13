@@ -63,15 +63,25 @@ public class GridManager : MonoSingleton<GridManager>
 
 		GetXY(mousePos, out int x, out int y);
 
-		Vector2Int placedObjectMousePos = new Vector2Int(x, y);
+		if (x >= 0 && y >= 0 && x < gridSettings.Width && y < gridSettings.Height)
+		{
+			Vector2Int placedObjectMousePos = new Vector2Int(x, y);
+			return selectedFeature.GetGridPositionList(placedObjectMousePos);
 
-		return selectedFeature.GetGridPositionList(placedObjectMousePos);
+		}
+
+		return null;
 
 	}
 
 	public bool CheckCanBuild(Vector3 mousePos, BuildingFeatures selectedFeature)
 	{
+
 		List<Vector2Int> gridPositionList = GetBuildingPlaceOnGrid(mousePos, selectedFeature);
+
+		if (gridPositionList == null)
+			return false;
+
 
 		foreach (Vector2Int gridPosition in gridPositionList)
 		{

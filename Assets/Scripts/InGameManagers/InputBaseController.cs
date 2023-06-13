@@ -9,6 +9,7 @@ public class InputBaseController : MonoBehaviour
 	private Vector2 lastMousePos;
 	protected Vector2 diff;
 
+
 	private void Awake()
 	{
 		mainCamera = Camera.main;
@@ -16,7 +17,7 @@ public class InputBaseController : MonoBehaviour
 
 	protected virtual void Start()
 	{
-		
+
 	}
 
 	private void Update()
@@ -25,8 +26,6 @@ public class InputBaseController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			OnMouseClick();
-
-			
 
 		}
 		if (Input.GetMouseButton(0))
@@ -38,7 +37,7 @@ public class InputBaseController : MonoBehaviour
 			OnMouseRelease();
 		}
 
-		if (Input.GetMouseButtonDown(1)) 
+		if (Input.GetMouseButtonDown(1))
 		{
 			OnRightClick();
 		}

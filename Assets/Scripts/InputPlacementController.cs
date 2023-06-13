@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class InputPlacementController : InputBaseController
@@ -74,10 +73,10 @@ public class InputPlacementController : InputBaseController
 	private void PlaceBuilding()
 	{
 
-		ActionManager.OnBuildingCreated?.Invoke(false);
-
 		if (!isBuildingCreated)
 			return;
+
+		ActionManager.OnBuildingCreated?.Invoke(false);
 
 		Vector3 mousePos = InputExtension.GetMouseWorldPosition(mainCamera);
 		mousePos.z = 0;

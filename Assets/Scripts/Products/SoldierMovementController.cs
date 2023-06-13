@@ -6,7 +6,8 @@ public class SoldierMovementController : AIPath
 	[SerializeField] private Transform soldierTarget;
 
 	private AIDestinationSetter destinationSetter;
-	private Transform olderTarget;
+
+	private bool isArrived;
 
 	protected override void Awake()
 	{
@@ -17,20 +18,32 @@ public class SoldierMovementController : AIPath
 	public override void OnTargetReached()
 	{
 		base.OnTargetReached();
-		ActionManager.ReturnToPool?.Invoke(soldierTarget.gameObject, PoolItem.SoldierTarget, 0.2f);
+
+		if (!isArrived)
+		{
+			ActionManager.ReturnToPool?.Invoke(destinationSetter.target.gameObject, PoolItem.SoldierTarget, 0f);
+			isArrived = true;
+			destinationSetter.target = null;
+
+		}
+
 	}
 
 	public void InitMovement(Vector3 pos)
 	{
-		if (soldierTarget != null)
+		if (destinationSetter.target != null)
 		{
-			olderTarget = soldierTarget;
-			ActionManager.ReturnToPool?.Invoke(olderTarget.gameObject, PoolItem.SoldierTarget, 0.2f);
+			soldierTarget.position = pos;
+		}
+		else
+		{
+			soldierTarget = ActionManager.GetPoolItem?.Invoke(PoolItem.SoldierTarget, pos, null).transform;
 
 		}
 
-		soldierTarget = ActionManager.GetPoolItem?.Invoke(PoolItem.SoldierTarget, pos, null).transform;
-
 		destinationSetter.target = soldierTarget;
+
+		isArrived = false;
+
 	}
 }

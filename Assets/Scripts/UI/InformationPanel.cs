@@ -24,15 +24,15 @@ public class InformationPanel : MonoBehaviour
 	private void Start()
 	{
 		buildingManager = BuildingManager.instance;
-
 		SetPos(false);
+		ActionManager.OnBuildingCreated += (bool a) => SetPos(false);
 		ActionManager.OnClickFromBuildingMenu += FillInformations;
+		ActionManager.OnEmptyClick += () => SetPos(false);
 	}
 
 	private void SetPos(bool isClickled)
 	{
 		float xPoint;
-
 
 		if (isClickled)
 		{
@@ -45,6 +45,7 @@ public class InformationPanel : MonoBehaviour
 
 		}
 
+
 		transform.GetChild(0).DOMoveX(xPoint, 1, isClickled).SetId(GetHashCode());
 
 	}
@@ -52,7 +53,6 @@ public class InformationPanel : MonoBehaviour
 	private void FillInformations(BuildingType buildingType, Transform buildingPosition)
 	{
 		SetPos(true);
-
 		BuildingFeatures buildingFeature = buildingManager.GetBuilding(buildingType);
 		photo.sprite = buildingFeature.UIPhoto1;
 		nameOfBuild.text = buildingFeature.NameOfBuilding;

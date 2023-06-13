@@ -19,12 +19,11 @@ public static class ActionManager
 	public static Func<PoolItem, Vector3, Transform, GameObject> GetPoolItem { get; set; }
 	public static Action<GameObject, PoolItem, float> ReturnToPool { get; set; }
 
-
 	//INGAME
 	public static Action<BuildingType, Transform> OnClickFromBuildingMenu { get; set; }
 	public static Action<bool> OnBuildingCreated { get; set; }
 	public static Action<bool, Soldier> OnSoldierSelected { get; set; }
-	public static Action<bool> isPointerOn { get; set; }
+	public static Action OnEmptyClick { get; set; }
 
 	public static void ResetAllStaticsVariables()
 	{

@@ -12,7 +12,6 @@ public class InputMovementController : InputBaseController
 	protected override void Start()
 	{
 		base.Start();
-		ActionManager.isPointerOn += (bool isOn) => isPointerOnSoldier = isOn;
 		ActionManager.OnSoldierSelected += OnSoldierClicked;
 	}
 
@@ -20,10 +19,6 @@ public class InputMovementController : InputBaseController
 	{
 		base.OnMouseClick();
 
-		if (!isPointerOnSoldier)
-		{
-			ActionManager.OnSoldierSelected?.Invoke(false, clickedSoldier);
-		}
 	}
 
 	protected override void OnRightClick()
@@ -35,13 +30,11 @@ public class InputMovementController : InputBaseController
 	private void OnSoldierClicked(bool isSelected, Soldier currentSoldier)
 	{
 		clickedSoldier = currentSoldier;
-		isSoldierSelected = isSelected;
+
 	}
 
 	private void SetSoldiersTarget()
 	{
-		if (!isSoldierSelected)
-			return;
 
 		Vector3 mouseToWorld = InputExtension.GetMouseWorldPosition(mainCamera);
 		mouseToWorld.z = 0;
