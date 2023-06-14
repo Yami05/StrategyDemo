@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 3181936634200591830}
   - component: {fileID: 8346300662254737353}
   - component: {fileID: -2085968695858302106}
+  - component: {fileID: 551302229493073348}
   m_Layer: 3
   m_Name: Research Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &653075226135153169
 Transform:
@@ -90,6 +91,18 @@ MonoBehaviour:
   uniqueID: 1214322683977092972
   updateError: 1
   checkTime: 1e+20
+--- !u!114 &551302229493073348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 653075226135153168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7e0e77adb25554bacc077da952f29b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &653075226424521000
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +117,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &653075226424521001
 Transform:
@@ -137,7 +150,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &653075226929065535
 Transform:
@@ -221,7 +234,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &653075227112504724
 Transform:

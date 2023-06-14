@@ -8,6 +8,12 @@ public enum PoolItem
 	GridCellPreview = 1,
 	SoldierTarget = 2,
 	Bullet = 3,
+	ExplosionVFX = 4,
+}
+
+public enum AtlasSprites
+{
+	Bullet = 0,
 }
 
 public enum AnimType

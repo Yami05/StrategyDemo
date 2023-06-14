@@ -25,7 +25,6 @@ public class SoldierMovementController : AIPath
 		{
 			if (soldier.IsTargetSetted)
 			{
-				StopCoroutine(soldier.Fire());
 				StartCoroutine(soldier.Fire());
 			}
 

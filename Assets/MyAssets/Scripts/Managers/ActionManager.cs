@@ -25,6 +25,11 @@ public static class ActionManager
 	public static Action<bool, Soldier> OnSoldierSelected { get; set; }
 	public static Action OnEmptyClick { get; set; }
 
+
+
+	//SpriteAtlas
+	public static Func<AtlasSprites, Sprite> SetSprite;
+
 	public static void ResetAllStaticsVariables()
 	{
 		Type type = typeof(ActionManager);

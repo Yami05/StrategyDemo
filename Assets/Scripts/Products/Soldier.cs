@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Soldier : ProductBaseController
+public class Soldier : ProductBaseController, ITarget
 {
 	[SerializeField] private float movementSpeed;
 
@@ -9,6 +9,7 @@ public class Soldier : ProductBaseController
 	private Transform target;
 
 	private bool isTargetSetted;
+	private bool isFiring = false;
 
 	public bool IsTargetSetted { get => isTargetSetted; }
 
@@ -31,44 +32,61 @@ public class Soldier : ProductBaseController
 	public void SetMovePoint(Vector3 pos)
 	{
 		isTargetSetted = false;
+		isFiring = false;
 		movementController.InitMovement(pos);
+
 	}
 
 	public void MoveToTarget(Transform target)
 	{
-		this.target = target;
-		Vector3 direction = target.position - transform.position;
-		Vector3 targetPosition = target.position + direction.normalized * -5f;
-		movementController.InitMovement(targetPosition);
+		isFiring = false;
 		isTargetSetted = true;
+
+		this.target = target;
+		Vector3 targetPos = target.position;
+		Vector3 direction = target.position - transform.position;
+		Vector3 pointToArrive = target.position + direction.normalized * -5f;
+
+		if (Vector3.Distance(transform.position, targetPos) < Vector3.Distance(pointToArrive, targetPos))
+		{
+			movementController.InitMovement(transform.position);
+		}
+		else
+		{
+			movementController.InitMovement(pointToArrive);
+		}
 	}
+
 
 	public IEnumerator Fire()
 	{
+		isFiring = true;
+
+		Vector3 targetPos = target.position;
+
 		while (isTargetSetted)
 		{
 			yield return new WaitForSeconds(productFeatures.FireRate);
 
+			if (!isFiring)
+				yield break;
+			if (target == null)
+				yield break;
+
+
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
-			Transform bullet = ActionManager.GetPoolItem?.Invoke(PoolItem.Bullet, transform.position, null).transform;
-
-			Vector3 targetPos = target.position;
-
-			while ((targetPos - bullet.position).magnitude > .1f)
-			{
-				bullet.position = Vector3.MoveTowards(bullet.position, targetPos, movementSpeed * Time.fixedDeltaTime);
-
-				Vector3 direction = targetPos - bullet.position;
-				float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-				bullet.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-				transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-				yield return wait;
-			}
-
+			GameObject bullet = ActionManager.GetPoolItem?.Invoke(PoolItem.Bullet, transform.position, null);
+			BulletController bulletController = bullet.GetComponent<BulletController>();
+			bulletController.MoveToTarget(target, movementSpeed);
+			bulletController.Damage = productFeatures.Damage;
+			Quaternion rotation = Quaternion.LookRotation(Vector3.forward, targetPos - transform.position);
+			transform.rotation = rotation;
 		}
 	}
 
+	public void MarkYourself(Soldier soldier)
+	{
+		soldier.MoveToTarget(transform);
+	}
 }

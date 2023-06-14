@@ -11980,7 +11980,7 @@ SpriteRenderer:
   m_Size: {x: 3.4, y: 3.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1036753319
@@ -13133,7 +13133,7 @@ SpriteRenderer:
   m_Size: {x: 3.4, y: 3.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1104635760
@@ -15926,7 +15926,7 @@ SpriteRenderer:
   m_Size: {x: 3, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1317005279
@@ -17227,7 +17227,7 @@ SpriteRenderer:
   m_Size: {x: 3.4, y: 3.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1466536519
@@ -18246,7 +18246,7 @@ SpriteRenderer:
   m_Size: {x: 3, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1528367481
@@ -22013,7 +22013,7 @@ SpriteRenderer:
   m_Size: {x: 3.4, y: 3.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1851351824
@@ -26001,7 +26001,7 @@ SpriteRenderer:
   m_Size: {x: 3, y: 3.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &2125725434
@@ -26602,6 +26602,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1702004618}
     m_Modifications:
+    - target: {fileID: 2015871449366488221, guid: da492d07b92e9e749877350d6eceff31, type: 3}
+      propertyPath: m_Size.x
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015871449366488221, guid: da492d07b92e9e749877350d6eceff31, type: 3}
+      propertyPath: m_Size.y
+      value: 2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2015871449366488221, guid: da492d07b92e9e749877350d6eceff31, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1496800952, guid: 2164a1816f29acf45ad76327ffa671c7, type: 3}
+    - target: {fileID: 2015871449366488221, guid: da492d07b92e9e749877350d6eceff31, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2015871449366488222, guid: da492d07b92e9e749877350d6eceff31, type: 3}
       propertyPath: m_RootOrder
       value: 27

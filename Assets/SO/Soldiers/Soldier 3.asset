@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004b8199b42d33145bfe922fa8979ca5, type: 3}
   m_Name: Soldier 3
   m_EditorClassIdentifier: 
-  photo: {fileID: 21300020, guid: 2164a1816f29acf45ad76327ffa671c7, type: 3}
+  photo: {fileID: -1119516109, guid: 2164a1816f29acf45ad76327ffa671c7, type: 3}
   productPrefab: {fileID: 1480980666674891656, guid: e9882de39ca6d6e4eb78931be6ddec9b, type: 3}
   health: 10
   damage: 2
