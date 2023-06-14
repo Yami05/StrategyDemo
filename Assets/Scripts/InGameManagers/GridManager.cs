@@ -5,10 +5,7 @@ public class GridManager : MonoSingleton<GridManager>
 {
 	[SerializeField] private GridSettings gridSettings;
 
-	[SerializeField] List<GameObject> displayedObjects = new List<GameObject>();
-
 	private GridCell[,] gridArray;
-	private TextMesh[,] textArray;
 
 	private void Awake()
 	{
@@ -18,13 +15,11 @@ public class GridManager : MonoSingleton<GridManager>
 	private void InitiliazeGrid()
 	{
 		SetArray();
-		DrawGrid();
 	}
 
 	private void SetArray()
 	{
 		gridArray = new GridCell[gridSettings.Width, gridSettings.Height];
-		textArray = new TextMesh[gridSettings.Width, gridSettings.Height];
 
 		for (int x = 0; x < gridSettings.Width; x++)
 		{
@@ -83,28 +78,19 @@ public class GridManager : MonoSingleton<GridManager>
 			return false;
 
 
+
 		foreach (Vector2Int gridPosition in gridPositionList)
 		{
-			Vector3 vector3 = new Vector3(gridPosition.x, gridPosition.y, 0f);
 
 			GridCell grid = GetGridObject(gridPosition.x, gridPosition.y);
 
 			if (grid == null || !grid.CanBuild)
 			{
-
-				SetColor(vector3, false);
 				return false;
-			}
-			else
-			{
-
-				SetColor(vector3, true);
-
 			}
 
 		}
 
-		ClosePreviewCell(gridPositionList);
 		return true;
 	}
 
@@ -122,62 +108,61 @@ public class GridManager : MonoSingleton<GridManager>
 	}
 
 	#region VisualPart
-	private void SetColor(Vector3 gridPos, bool isAvailable)
+
+
+	public void GridPreview(Vector3 mousePos, BuildingFeatures selectedFeature)
 	{
-		GridCell gridCell = GetGridObject((int)gridPos.x, (int)gridPos.y);
 
-		if (gridCell == null)
-			return;
+		CloseGridPreview();
 
-		if (gridCell.IsColored == true)
-			return;
+		List<Vector2Int> gridPositionList = GetBuildingPlaceOnGrid(mousePos, selectedFeature);
+		Color gridColor;
 
-
-		GameObject previewObj = ActionManager.GetPoolItem?.Invoke(PoolItem.GridCellPreview, gridPos, null);
-		gridCell.IsColored = true;
-
-		Color selectedColor;
-
-		if (isAvailable)
+		if (CheckCanBuild(mousePos, selectedFeature))
 		{
-			selectedColor = Color.green;
+			gridColor = Color.green;
 		}
 		else
 		{
-			selectedColor = Color.red;
+			gridColor = Color.red;
 		}
 
-		previewObj.GetComponentInChildren<SpriteRenderer>().color = selectedColor;
+		if (gridPositionList == null)
+			return;
 
-		if (!displayedObjects.Contains(previewObj))
+
+		foreach (Vector2Int gridPosition in gridPositionList)
 		{
-			displayedObjects.Add(previewObj);
+			Vector3 grid3D = new Vector3(gridPosition.x, gridPosition.y, -0.1f);
+			GridCell gridCell = GetGridObject(gridPosition.x, gridPosition.y);
+
+			if (gridCell.IsColored)
+				return;
+
+			GameObject gridPreview = ActionManager.GetPoolItem?.Invoke(PoolItem.GridCellPreview, grid3D, null);
+			SpriteRenderer spriteRenderer = gridPreview.GetComponentInChildren<SpriteRenderer>();
+			spriteRenderer.sprite = ActionManager.SetSprite?.Invoke(AtlasSprites.Square);
+			spriteRenderer.material.color = gridColor;
+			activeGridPreviews.Add(gridPreview);
 		}
 	}
 
-	private void ClosePreviewCell(List<Vector2Int> gridPositionList)
-	{
 
-		foreach (GameObject obj in displayedObjects)
+	private List<GameObject> activeGridPreviews = new List<GameObject>();
+
+	public void CloseGridPreview()
+	{
+		foreach (GameObject gridPreview in activeGridPreviews)
 		{
-			Vector2Int objPos = new Vector2Int((int)obj.transform.position.x, (int)obj.transform.position.y);
-			GridCell grid = GetGridObject(objPos.x, objPos.y);
+			GridCell gridCell = GetGridObject((int)gridPreview.transform.position.x, (int)gridPreview.transform.position.y);
+			gridCell.IsColored = false;
 
-			if (!gridPositionList.Contains(objPos))
-			{
-				// Return the object to the pool
-				ActionManager.ReturnToPool?.Invoke(obj, PoolItem.GridCellPreview, 0);
-
-			}
-
-			grid.IsColored = false;
+			ActionManager.ReturnToPool?.Invoke(gridPreview, PoolItem.GridCellPreview, 0);
 		}
 
+		activeGridPreviews.Clear();
 	}
 
-	private void DrawGrid()
-	{
-		gridSettings.DrawGrid(GetWorldPosition, null, gridArray, textArray);
-	}
+
 	#endregion
 }

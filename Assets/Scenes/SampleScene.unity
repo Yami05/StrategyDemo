@@ -602,15 +602,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 980505724137387148, guid: c315f09b29f880b43a9e20ad2b8eabf6, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.1607752
+      value: 4.471724
       objectReference: {fileID: 0}
     - target: {fileID: 980505724137387148, guid: c315f09b29f880b43a9e20ad2b8eabf6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.1607752
+      value: 4.471724
       objectReference: {fileID: 0}
     - target: {fileID: 980505724137387148, guid: c315f09b29f880b43a9e20ad2b8eabf6, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.1607752
+      value: 4.471724
       objectReference: {fileID: 0}
     - target: {fileID: 980505724137387148, guid: c315f09b29f880b43a9e20ad2b8eabf6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -776,7 +776,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSettings: {fileID: 11400000, guid: 2550c710a6b919f429c5959830559b78, type: 2}
-  displayedObjects: []
 --- !u!4 &2107653024
 Transform:
   m_ObjectHideFlags: 0

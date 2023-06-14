@@ -60,14 +60,7 @@ public class InputPlacementController : InputBaseController
 
 		building.transform.position = mousePos;
 
-		if (gridManager.CheckCanBuild(mousePos, selectedFeature))
-		{
-			//give color green
-		}
-		else
-		{
-			//give color red
-		}
+		gridManager.GridPreview(mousePos, selectedFeature);
 	}
 
 	private void PlaceBuilding()
@@ -93,7 +86,7 @@ public class InputPlacementController : InputBaseController
 			Destroy(building);
 		}
 
-
+		gridManager.CloseGridPreview();
 		isBuildingCreated = false;
 	}
 

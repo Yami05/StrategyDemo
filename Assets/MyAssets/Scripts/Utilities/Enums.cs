@@ -14,6 +14,7 @@ public enum PoolItem
 public enum AtlasSprites
 {
 	Bullet = 0,
+	Square = 1,
 }
 
 public enum AnimType
