@@ -7,6 +7,7 @@ public enum PoolItem
 	UIProductionItem = 0,
 	GridCellPreview = 1,
 	SoldierTarget = 2,
+	Bullet = 3,
 }
 
 public enum AnimType

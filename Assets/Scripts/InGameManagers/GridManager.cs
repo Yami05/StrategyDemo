@@ -126,6 +126,9 @@ public class GridManager : MonoSingleton<GridManager>
 	{
 		GridCell gridCell = GetGridObject((int)gridPos.x, (int)gridPos.y);
 
+		if (gridCell == null)
+			return;
+
 		if (gridCell.IsColored == true)
 			return;
 

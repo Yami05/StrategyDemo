@@ -4,11 +4,12 @@ public class ProductBaseController : MonoBehaviour
 {
 
 	protected BuildingBaseController productionBuilding;
+	protected ProductFeatures productFeatures;
+
+	public ProductFeatures ProductFeatures { get => productFeatures; set => productFeatures = value; }
 
 	public virtual void OnInitiliazed(Transform productionBuilding)
 	{
-		print(productionBuilding.gameObject.name);
-		print(productionBuilding.position);
-		this.productionBuilding = productionBuilding.GetComponent<BuildingBaseController>();
+		this.productionBuilding = productionBuilding.GetComponentInParent<BuildingBaseController>();
 	}
 }

@@ -16,3 +16,4 @@ MonoBehaviour:
   productPrefab: {fileID: 1480980666674891656, guid: e9882de39ca6d6e4eb78931be6ddec9b, type: 3}
   health: 10
   damage: 2
+  fireRate: 0.5

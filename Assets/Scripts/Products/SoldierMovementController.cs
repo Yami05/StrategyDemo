@@ -6,6 +6,7 @@ public class SoldierMovementController : AIPath
 	[SerializeField] private Transform soldierTarget;
 
 	private AIDestinationSetter destinationSetter;
+	private Soldier soldier;
 
 	private bool isArrived;
 
@@ -13,6 +14,7 @@ public class SoldierMovementController : AIPath
 	{
 		base.Awake();
 		destinationSetter = GetComponent<AIDestinationSetter>();
+		soldier = GetComponent<Soldier>();
 	}
 
 	public override void OnTargetReached()
@@ -21,6 +23,12 @@ public class SoldierMovementController : AIPath
 
 		if (!isArrived)
 		{
+			if (soldier.IsTargetSetted)
+			{
+				StopCoroutine(soldier.Fire());
+				StartCoroutine(soldier.Fire());
+			}
+
 			ActionManager.ReturnToPool?.Invoke(destinationSetter.target.gameObject, PoolItem.SoldierTarget, 0f);
 			isArrived = true;
 			destinationSetter.target = null;

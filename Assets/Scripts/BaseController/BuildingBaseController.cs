@@ -6,7 +6,6 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 	private DynamicGridObstacle dynamicGridObstacle;
 	private Transform midPoint;
 
-	//Setting this with instantiate
 	private BuildingType type;
 
 	public BuildingType Type { get => type; set => type = value; }
@@ -37,6 +36,6 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 
 	public void MarkYourself(Soldier soldier)
 	{
-		soldier.MoveToTarget(MidPoint.position);
+		soldier.MoveToTarget(MidPoint);
 	}
 }
