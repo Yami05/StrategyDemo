@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class ProductBaseController : MonoBehaviour
 {
-	[SerializeField] private ProductFeatures productFeatures;
 
-	public virtual void OnInitiliazed()
+	protected BuildingBaseController productionBuilding;
+
+	public virtual void OnInitiliazed(Transform productionBuilding)
 	{
-
+		print(productionBuilding.gameObject.name);
+		print(productionBuilding.position);
+		this.productionBuilding = productionBuilding.GetComponent<BuildingBaseController>();
 	}
 }

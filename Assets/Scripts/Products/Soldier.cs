@@ -1,9 +1,8 @@
-using Pathfinding;
+using System.Collections;
 using UnityEngine;
 
 public class Soldier : ProductBaseController
 {
-
 	private SoldierMovementController movementController;
 
 	private void Awake()
@@ -11,23 +10,28 @@ public class Soldier : ProductBaseController
 		movementController = GetComponent<SoldierMovementController>();
 	}
 
+	private IEnumerator Start()
+	{
+		yield return new WaitForSeconds(0.5f);
+		SetMovePoint(productionBuilding.MidPoint.position);
+	}
+
 	private void OnMouseDown()
 	{
 		ActionManager.OnSoldierSelected?.Invoke(true, this);
 	}
 
-	private void OnMouseEnter()
-	{
-
-	}
-
-	private void OnMouseExit()
-	{
-
-	}
-
-	public void SetTargetPosition(Vector3 pos)
+	public void SetMovePoint(Vector3 pos)
 	{
 		movementController.InitMovement(pos);
 	}
+
+	public void MoveToTarget(Vector3 targetPos)
+	{
+		Vector3 direction = targetPos - transform.position;
+
+		Vector3 targetPosition = targetPos + direction.normalized * -5f;
+		SetMovePoint(targetPosition);
+	}
+
 }

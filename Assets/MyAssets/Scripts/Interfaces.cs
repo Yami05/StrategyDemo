@@ -6,6 +6,11 @@ interface IInteract
 }
 
 
+interface ITarget
+{
+	void MarkYourself(Soldier soldier);
+}
+
 interface ISaveable
 {
 	object CaptureState();

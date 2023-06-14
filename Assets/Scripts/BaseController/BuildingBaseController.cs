@@ -1,18 +1,21 @@
 using Pathfinding;
 using UnityEngine;
 
-public class BuildingBaseController : MonoBehaviour
+public class BuildingBaseController : MonoBehaviour, ITarget
 {
 	private DynamicGridObstacle dynamicGridObstacle;
+	private Transform midPoint;
 
 	//Setting this with instantiate
 	private BuildingType type;
 
 	public BuildingType Type { get => type; set => type = value; }
+	public Transform MidPoint { get => midPoint; }
 
 	private void Awake()
 	{
 		dynamicGridObstacle = GetComponent<DynamicGridObstacle>();
+		midPoint = transform.GetChild(0);
 	}
 
 	private void Start()
@@ -29,6 +32,11 @@ public class BuildingBaseController : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		ActionManager.OnClickFromBuildingMenu?.Invoke(Type, transform);
+		ActionManager.OnClickFromBuildingMenu?.Invoke(Type, MidPoint);
+	}
+
+	public void MarkYourself(Soldier soldier)
+	{
+		soldier.MoveToTarget(MidPoint.position);
 	}
 }

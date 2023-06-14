@@ -11,7 +11,7 @@ public class ProductFeatures : ScriptableObject
 	public GameObject GetProduct(Transform buildingPos)
 	{
 		GameObject product = Instantiate(productPrefab, buildingPos.position - Vector3.forward * 0.1f, Quaternion.identity);
-		product.GetComponent<ProductBaseController>().OnInitiliazed();
+		product.GetComponent<ProductBaseController>().OnInitiliazed(buildingPos);
 		return product;
 	}
 
