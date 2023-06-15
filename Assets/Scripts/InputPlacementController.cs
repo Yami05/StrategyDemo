@@ -6,6 +6,7 @@ public class InputPlacementController : InputBaseController
 	private BuildingManager buildingManager;
 	private GameObject building;
 	private BuildingFeatures selectedFeature;
+	private BuildingBaseController buildingBaseController;
 
 	private bool isBuildingCreated;
 
@@ -46,6 +47,7 @@ public class InputPlacementController : InputBaseController
 
 		ActionManager.OnBuildingCreated?.Invoke(true);
 		building = selectedFeature.GetBuilding();
+		buildingBaseController = building.GetComponent<BuildingBaseController>();
 		isBuildingCreated = true;
 	}
 
@@ -60,7 +62,12 @@ public class InputPlacementController : InputBaseController
 
 		building.transform.position = mousePos;
 
-		gridManager.GridPreview(mousePos, selectedFeature);
+		gridManager.GridPreview(mousePos, selectedFeature, OpenBuildingPreview);
+	}
+
+	private void OpenBuildingPreview(Color color)
+	{
+		buildingBaseController.Preview.color = color;
 	}
 
 	private void PlaceBuilding()
@@ -80,6 +87,7 @@ public class InputPlacementController : InputBaseController
 			building.transform.position = gridManager.GetWorldPosition(x, y);
 
 			gridManager.SetCanBuild(mousePos, selectedFeature);
+			buildingBaseController.Preview.gameObject.SetActive(false);
 		}
 		else
 		{

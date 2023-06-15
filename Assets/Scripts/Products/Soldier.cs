@@ -21,7 +21,7 @@ public class Soldier : ProductBaseController, ITarget
 	private IEnumerator Start()
 	{
 		yield return new WaitForSeconds(0.5f);
-		SetMovePoint(productionBuilding.MidPoint.position);
+		SetMovePoint(productionBuilding.MovePoint.position);
 	}
 
 	private void OnMouseDown()

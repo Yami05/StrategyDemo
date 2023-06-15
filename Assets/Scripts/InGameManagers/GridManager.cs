@@ -1,9 +1,14 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GridManager : MonoSingleton<GridManager>
 {
 	[SerializeField] private GridSettings gridSettings;
+
+	//In GridPreviewing i added 2 versions, one of them reaching the building child to color the
+	//preview the other (expensive) one is creating pool objects to color the preview.
+	[SerializeField] private bool expensiveGridPreview;
 
 	private GridCell[,] gridArray;
 
@@ -110,13 +115,13 @@ public class GridManager : MonoSingleton<GridManager>
 	#region VisualPart
 
 
-	public void GridPreview(Vector3 mousePos, BuildingFeatures selectedFeature)
+	public void GridPreview(Vector3 mousePos, BuildingFeatures selectedFeature, Action<Color> BuildingPreview)
 	{
-
-		CloseGridPreview();
-
 		List<Vector2Int> gridPositionList = GetBuildingPlaceOnGrid(mousePos, selectedFeature);
 		Color gridColor;
+
+		if (gridPositionList == null)
+			return;
 
 		if (CheckCanBuild(mousePos, selectedFeature))
 		{
@@ -127,26 +132,32 @@ public class GridManager : MonoSingleton<GridManager>
 			gridColor = Color.red;
 		}
 
-		if (gridPositionList == null)
-			return;
-
-
-		foreach (Vector2Int gridPosition in gridPositionList)
+		if (expensiveGridPreview)
 		{
-			Vector3 grid3D = new Vector3(gridPosition.x, gridPosition.y, -0.1f);
-			GridCell gridCell = GetGridObject(gridPosition.x, gridPosition.y);
+			CloseGridPreview();
 
-			if (gridCell.IsColored)
-				return;
+			foreach (Vector2Int gridPosition in gridPositionList)
+			{
+				Vector3 grid3D = new Vector3(gridPosition.x, gridPosition.y, -0.1f);
+				GridCell gridCell = GetGridObject(gridPosition.x, gridPosition.y);
 
-			GameObject gridPreview = ActionManager.GetPoolItem?.Invoke(PoolItem.GridCellPreview, grid3D, null);
-			SpriteRenderer spriteRenderer = gridPreview.GetComponentInChildren<SpriteRenderer>();
-			spriteRenderer.sprite = ActionManager.SetSprite?.Invoke(AtlasSprites.Square);
-			spriteRenderer.material.color = gridColor;
-			activeGridPreviews.Add(gridPreview);
+				if (gridCell.IsColored)
+					return;
+
+				GameObject gridPreview = ActionManager.GetPoolItem?.Invoke(PoolItem.GridCellPreview, grid3D, null);
+				SpriteRenderer spriteRenderer = gridPreview.GetComponentInChildren<SpriteRenderer>();
+
+				spriteRenderer.sprite = ActionManager.SetSprite?.Invoke(AtlasSprites.Square);
+				spriteRenderer.material.color = gridColor;
+				activeGridPreviews.Add(gridPreview);
+			}
 		}
-	}
+		else
+		{
+			BuildingPreview(gridColor);
+		}
 
+	}
 
 	private List<GameObject> activeGridPreviews = new List<GameObject>();
 

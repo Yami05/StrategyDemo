@@ -54,7 +54,7 @@ public class InformationPanel : MonoBehaviour
 	{
 		SetPos(true);
 		BuildingFeatures buildingFeature = buildingManager.GetBuilding(buildingType);
-		photo.sprite = buildingFeature.UIPhoto1;
+		photo.sprite = buildingFeature.GetUIPhoto();
 		nameOfBuild.text = buildingFeature.NameOfBuilding;
 
 		canProduce = buildingFeature.CanProduce;

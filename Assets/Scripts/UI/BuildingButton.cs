@@ -23,7 +23,7 @@ public class BuildingButton : ButtonBaseController, IPointerDownHandler
 
 		BuildingFeatures buildingFeature = buildingManager.GetBuilding(buildingType);
 
-		image.sprite = buildingFeature.UIPhoto1;
+		image.sprite = buildingFeature.GetUIPhoto();
 	}
 
 	public void OnPointerDown(PointerEventData eventData)

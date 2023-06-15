@@ -8,7 +8,6 @@ public class BuildingFeatures : ScriptableObject
 	[ShowIf("@canProduce != false")]
 	[SerializeField] private ProductFeatures[] productFeatures;
 	[SerializeField] private GameObject buildingPrefab;
-	[SerializeField] private Sprite UIPhoto;
 
 	[SerializeField] private BuildingType buildingType;
 
@@ -20,12 +19,11 @@ public class BuildingFeatures : ScriptableObject
 	private float height;
 
 	public BuildingType BuildingType { get => buildingType; }
-	public Sprite UIPhoto1 { get => UIPhoto; }
 	public string NameOfBuilding { get => nameOfBuilding; }
 	public bool CanProduce { get => canProduce; }
 	public GameObject BuildingPrefab { get => buildingPrefab; }
 	public ProductFeatures[] ProductFeatures { get => productFeatures; set => productFeatures = value; }
-	public float Health { get => health;  }
+	public float Health { get => health; }
 
 	public GameObject GetBuilding()
 	{
@@ -37,6 +35,11 @@ public class BuildingFeatures : ScriptableObject
 		width = localScale.x;
 		height = localScale.y;
 		return building;
+	}
+
+	public Sprite GetUIPhoto()
+	{
+		return buildingPrefab.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite;
 	}
 
 	public List<Vector2Int> GetGridPositionList(Vector2Int offset)
