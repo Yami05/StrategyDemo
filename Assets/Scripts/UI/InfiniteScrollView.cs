@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InfiniteScrollView : MonoBehaviour, IBeginDragHandler, IDragHandler, IScrollHandler
+public class InfiniteScrollView : MonoBehaviour, IBeginDragHandler, IDragHandler
 {
 	[SerializeField] private Transform content;
 	[SerializeField] private Transform lowerBound, upperBound;
@@ -13,7 +13,6 @@ public class InfiniteScrollView : MonoBehaviour, IBeginDragHandler, IDragHandler
 	private Vector2 lastPosOfDrag;
 
 	private bool isPositiveDrag;
-	private bool isBuildingSpawned;
 
 	private void Awake()
 	{
@@ -31,6 +30,7 @@ public class InfiniteScrollView : MonoBehaviour, IBeginDragHandler, IDragHandler
 	{
 		lastPosOfDrag = eventData.position;
 	}
+
 
 	public void OnDrag(PointerEventData eventData)
 	{
@@ -94,11 +94,6 @@ public class InfiniteScrollView : MonoBehaviour, IBeginDragHandler, IDragHandler
 		currItem.position = newPos;
 		currItem.SetSiblingIndex(endItemIndex);
 
-	}
-
-	public void OnScroll(PointerEventData eventData)
-	{
-		isPositiveDrag = eventData.scrollDelta.y > 0;
 	}
 
 }

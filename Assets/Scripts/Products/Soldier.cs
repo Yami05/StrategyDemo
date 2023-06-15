@@ -4,6 +4,7 @@ using UnityEngine;
 public class Soldier : ProductBaseController, ITarget
 {
 	[SerializeField] private float movementSpeed;
+	[SerializeField] private Transform bulletSpawnPoint;
 
 	private SoldierMovementController movementController;
 	private Transform target;
@@ -21,7 +22,12 @@ public class Soldier : ProductBaseController, ITarget
 	private IEnumerator Start()
 	{
 		yield return new WaitForSeconds(0.5f);
-		SetMovePoint(productionBuilding.MovePoint.position);
+
+		if (productionBuilding != null)
+		{
+			SetMovePoint(productionBuilding.MidPoint.position);
+
+		}
 	}
 
 	private void OnMouseDown()
@@ -33,6 +39,8 @@ public class Soldier : ProductBaseController, ITarget
 	{
 		isTargetSetted = false;
 		isFiring = false;
+
+		movementController.enableRotation = true;
 		movementController.InitMovement(pos);
 
 	}
@@ -47,6 +55,8 @@ public class Soldier : ProductBaseController, ITarget
 		Vector3 direction = target.position - transform.position;
 		Vector3 pointToArrive = target.position + direction.normalized * -5f;
 
+		movementController.enableRotation = true;
+
 		if (Vector3.Distance(transform.position, targetPos) < Vector3.Distance(pointToArrive, targetPos))
 		{
 			movementController.InitMovement(transform.position);
@@ -57,12 +67,10 @@ public class Soldier : ProductBaseController, ITarget
 		}
 	}
 
-
 	public IEnumerator Fire()
 	{
 		isFiring = true;
 
-		Vector3 targetPos = target.position;
 
 		while (isTargetSetted)
 		{
@@ -73,15 +81,19 @@ public class Soldier : ProductBaseController, ITarget
 			if (target == null)
 				yield break;
 
+			movementController.enableRotation = false;
 
 			WaitForFixedUpdate wait = new WaitForFixedUpdate();
 
-			GameObject bullet = ActionManager.GetPoolItem?.Invoke(PoolItem.Bullet, transform.position, null);
+			GameObject bullet = ActionManager.GetPoolItem?.Invoke(PoolItem.Bullet, bulletSpawnPoint.position, null);
 			BulletController bulletController = bullet.GetComponent<BulletController>();
+
+			bulletController.IsShooted = true;
 			bulletController.MoveToTarget(target, movementSpeed);
 			bulletController.Damage = productFeatures.Damage;
-			Quaternion rotation = Quaternion.LookRotation(Vector3.forward, targetPos - transform.position);
+			Quaternion rotation = Quaternion.LookRotation(Vector3.forward, target.position - transform.position);
 			transform.rotation = rotation;
+
 		}
 	}
 

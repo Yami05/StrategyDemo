@@ -7,7 +7,7 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 
 	private DynamicGridObstacle dynamicGridObstacle;
 	private Transform midPoint;
-	private Transform movePoint;
+	protected Transform movePoint;
 	private BuildingFeatures feature;
 	private DamageHandler damageHandler;
 
@@ -24,7 +24,6 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 		dynamicGridObstacle = GetComponent<DynamicGridObstacle>();
 		damageHandler = GetComponent<DamageHandler>();
 		midPoint = transform.GetChild(1);
-		movePoint = transform.GetChild(2);
 	}
 
 	private void Start()
@@ -34,10 +33,10 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 
 	}
 
-	private void OnPlaced(bool a)
+	private void OnPlaced(bool isBuildingCreated)
 	{
-		if (!a)
-			DelayExt.After(this, 0.5f, dynamicGridObstacle.DoUpdateGraphs);
+		if (!isBuildingCreated)
+			dynamicGridObstacle.DoUpdateGraphs();
 
 	}
 
@@ -50,8 +49,5 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 	{
 		soldier.MoveToTarget(MidPoint);
 	}
-
-
-
 
 }

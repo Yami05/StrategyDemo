@@ -9,7 +9,6 @@ public class InputBaseController : MonoBehaviour
 	private Vector2 lastMousePos;
 	protected Vector2 diff;
 
-
 	private void Awake()
 	{
 		mainCamera = Camera.main;

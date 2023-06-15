@@ -776,6 +776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSettings: {fileID: 11400000, guid: 2550c710a6b919f429c5959830559b78, type: 2}
+  expensiveGridPreview: 0
 --- !u!4 &2107653024
 Transform:
   m_ObjectHideFlags: 0
@@ -995,6 +996,14 @@ PrefabInstance:
     - target: {fileID: 1587039750, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 248.99995
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146660597, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
+      propertyPath: m_Vertical
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146660597, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1414718389773064890, guid: e59634d27c2be4b79a5402e9a0531c86, type: 3}
       propertyPath: m_AnchoredPosition.x

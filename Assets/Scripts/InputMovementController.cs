@@ -40,6 +40,7 @@ public class InputMovementController : InputBaseController
 		mouseToWorld.z = 0;
 		RaycastHit2D hit = InputExtension.GetRaycastHit2D(mainCamera);
 
+
 		if (hit.transform.TryGetComponent<ITarget>(out ITarget target))
 		{
 			target.MarkYourself(clickedSoldier);

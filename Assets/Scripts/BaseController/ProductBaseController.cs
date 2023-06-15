@@ -7,9 +7,7 @@ public class ProductBaseController : MonoBehaviour
 	protected ProductFeatures productFeatures;
 	protected DamageHandler damageHandler;
 
-
 	public ProductFeatures ProductFeatures { get => productFeatures; set => productFeatures = value; }
-
 
 	private void Start()
 	{

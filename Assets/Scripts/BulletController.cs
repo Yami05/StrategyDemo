@@ -8,8 +8,10 @@ public class BulletController : MonoBehaviour
 
 	private float movementSpeed;
 	private float damage;
+	private bool isShooted;
 
 	public float Damage { get => damage; set => damage = value; }
+	public bool IsShooted { get => isShooted; set => isShooted = value; }
 
 	private void Start()
 	{
@@ -32,6 +34,9 @@ public class BulletController : MonoBehaviour
 	private void FixedUpdate()
 	{
 
+		if (!IsShooted)
+			return;
+
 		transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.fixedDeltaTime);
 
 		if (transform.position == targetPosition)
@@ -41,6 +46,8 @@ public class BulletController : MonoBehaviour
 				damageHandler.TakeDamage(Damage);
 
 			}
+
+			IsShooted = false;
 			ActionManager.ReturnToPool?.Invoke(gameObject, PoolItem.Bullet, 0.0f);
 		}
 

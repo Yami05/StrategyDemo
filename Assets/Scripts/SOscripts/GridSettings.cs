@@ -8,9 +8,12 @@ public class GridSettings : ScriptableObject
 	[SerializeField] private int height;
 	[SerializeField] private int cellSize;
 
+	#region Encaps
 	public int Width { get => width; }
 	public int Height { get => height; }
 	public int CellSize { get => cellSize; }
+	#endregion
+
 
 	public void DrawGrid(Func<int, int, Vector3> GetWorldPosition, Transform textParent, GridCell[,] gridArray, TextMesh[,] textArray)
 	{

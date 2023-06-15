@@ -55,9 +55,7 @@ public class GameManager : MonoSingleton<GameManager>
 	private void GameEndFail()
 	{
 		GameEnd();
-		//RunExtension.After(2f, () => RestartLevel());
 	}
-
 
 	private void PreviousLevel()
 	{

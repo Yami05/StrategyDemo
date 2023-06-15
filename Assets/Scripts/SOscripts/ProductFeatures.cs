@@ -18,8 +18,10 @@ public class ProductFeatures : ScriptableObject
 		return product;
 	}
 
+	#region Encaps
 	public Sprite Photo { get => photo; }
 	public float Health { get => health; }
 	public float Damage { get => damage; }
 	public float FireRate { get => fireRate;}
+	#endregion
 }

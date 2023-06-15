@@ -7,7 +7,6 @@ public static class ActionManager
 	public static Action<bool> OpenZoomPanel { get; set; }
 	public static Action<Vector3, PoolItem> SetUIParticle { get; set; }
 
-
 	//Camera
 	public static Action<Transform> SetCameraTarget { get; set; }
 
@@ -26,9 +25,9 @@ public static class ActionManager
 	public static Action OnEmptyClick { get; set; }
 
 
-
 	//SpriteAtlas
 	public static Func<AtlasSprites, Sprite> SetSprite;
+
 
 	public static void ResetAllStaticsVariables()
 	{

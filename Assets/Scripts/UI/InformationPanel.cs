@@ -45,7 +45,6 @@ public class InformationPanel : MonoBehaviour
 
 		}
 
-
 		transform.GetChild(0).DOMoveX(xPoint, 1, isClickled).SetId(GetHashCode());
 
 	}

@@ -5,7 +5,6 @@ interface IInteract
 	void Interact();
 }
 
-
 interface ITarget
 {
 	void MarkYourself(Soldier soldier);

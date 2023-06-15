@@ -18,12 +18,15 @@ public class BuildingFeatures : ScriptableObject
 	private float width;
 	private float height;
 
+	#region Encaps
 	public BuildingType BuildingType { get => buildingType; }
 	public string NameOfBuilding { get => nameOfBuilding; }
 	public bool CanProduce { get => canProduce; }
 	public GameObject BuildingPrefab { get => buildingPrefab; }
 	public ProductFeatures[] ProductFeatures { get => productFeatures; set => productFeatures = value; }
 	public float Health { get => health; }
+	#endregion
+
 
 	public GameObject GetBuilding()
 	{
