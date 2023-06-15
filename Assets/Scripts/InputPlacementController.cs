@@ -88,7 +88,7 @@ public class InputPlacementController : InputBaseController
 			buildPos.z -= 0.1f;
 			building.transform.position = buildPos;
 
-			gridManager.SetCanBuild(mousePos, selectedFeature);
+			gridManager.SetCanBuild(mousePos, selectedFeature, false);
 			buildingBaseController.Preview.gameObject.SetActive(false);
 		}
 		else

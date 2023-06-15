@@ -7,9 +7,10 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 
 	private DynamicGridObstacle dynamicGridObstacle;
 	private Transform midPoint;
-	protected Transform movePoint;
 	private BuildingFeatures feature;
 	private DamageHandler damageHandler;
+	private GridManager gridManager;
+	protected Transform movePoint;
 
 	private BuildingType type;
 
@@ -28,6 +29,7 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 
 	private void Start()
 	{
+		gridManager = GridManager.instance;
 		ActionManager.OnBuildingCreated += OnPlaced;
 		damageHandler.Health = feature.Health;
 
@@ -48,6 +50,12 @@ public class BuildingBaseController : MonoBehaviour, ITarget
 	public void MarkYourself(Soldier soldier)
 	{
 		soldier.MoveToTarget(MidPoint);
+	}
+
+	private void OnDestroy()
+	{
+		gridManager.SetCanBuild(transform.position, feature, true);
+
 	}
 
 }

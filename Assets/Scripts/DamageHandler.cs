@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class DamageHandler : MonoBehaviour
@@ -12,8 +13,10 @@ public class DamageHandler : MonoBehaviour
 
 		if (Health <= 0)
 		{
-			ActionManager.GetPoolItem?.Invoke(PoolItem.ExplosionVFX, transform.position, null);
+			GameObject explosionVfx = ActionManager.GetPoolItem?.Invoke(PoolItem.ExplosionVFX, transform.position, null);
+			ActionManager.ReturnToPool?.Invoke(explosionVfx, PoolItem.ExplosionVFX, 1f);
 			Destroy(gameObject);
 		}
 	}
+
 }

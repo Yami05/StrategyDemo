@@ -83,7 +83,6 @@ public class GridManager : MonoSingleton<GridManager>
 			return false;
 
 
-
 		foreach (Vector2Int gridPosition in gridPositionList)
 		{
 
@@ -99,7 +98,7 @@ public class GridManager : MonoSingleton<GridManager>
 		return true;
 	}
 
-	public void SetCanBuild(Vector3 mousePos, BuildingFeatures selectedFeature)
+	public void SetCanBuild(Vector3 mousePos, BuildingFeatures selectedFeature, bool isFree)
 	{
 		List<Vector2Int> gridPositionList = GetBuildingPlaceOnGrid(mousePos, selectedFeature);
 
@@ -107,7 +106,7 @@ public class GridManager : MonoSingleton<GridManager>
 		{
 			GridCell grid = GetGridObject(gridPosition.x, gridPosition.y);
 
-			grid.CanBuild = false;
+			grid.CanBuild = isFree;
 		}
 
 	}
